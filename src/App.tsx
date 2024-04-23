@@ -1,31 +1,14 @@
 import { useEffect, useState } from 'react';
 import Word from './Word';
-import { WORDS } from './words';
 import Letter from './Letter';
+
+import { WORDS } from './words';
+import { NUM_ATTEMPTS, WORD_LENGTH } from './constants';
 
 const lettersRegex = /^[a-zA-Z]+$/;
 const solution = WORDS[Math.floor(Math.random() * WORDS.length)];
-const usedLettersSet: Set<string> = new Set();
 const alphabet = [...Array(26).keys()].map((i) => String.fromCharCode(i + 65));
-
-type MatchingType = 'close' | 'position' | 'none';
-
-const isMatching = (letter: string, solution: string): MatchingType => {
-  letter = letter.toUpperCase();
-  console.log(solution, letter);
-
-  let result = '';
-  for (let i = 0; i < 5; i++) {
-    if (solution.includes(letter) && solution[i] == letter) {
-      result = 'position';
-    } else if (solution[i] !== letter && solution.includes(letter)) {
-      result = 'close';
-    } else {
-      result = 'none';
-    }
-  }
-  return result as MatchingType;
-};
+const usedLettersSet: Set<string> = new Set();
 
 const isNotAllowedKey = (key: string) => {
   return (
@@ -40,7 +23,7 @@ const isNotAllowedKey = (key: string) => {
 };
 
 function App() {
-  const [guesses, setGuesses] = useState(Array(6).fill(null));
+  const [guesses, setGuesses] = useState(Array(NUM_ATTEMPTS).fill(null));
   const [currentGuess, setCurrentGuess] = useState('');
   const [isGameOver, setIsGameOver] = useState(false);
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
@@ -53,15 +36,16 @@ function App() {
       }
 
       if (e.key === 'Enter') {
-        if (currentGuess.length < 5) {
+        if (currentGuess.length < WORD_LENGTH) {
           return;
         }
 
+        setUsedLetters([...usedLettersSet]);
         const newGuesses = [...guesses];
         newGuesses[currentGuessIndex] = currentGuess;
         setGuesses(newGuesses);
 
-        if (currentGuessIndex !== 5) {
+        if (currentGuessIndex !== NUM_ATTEMPTS - 1) {
           setCurrentGuess('');
         }
 
@@ -69,19 +53,23 @@ function App() {
 
         if (
           isCorrect ||
-          (currentGuessIndex === 5 && currentGuess.length >= 5)
+          (currentGuessIndex === NUM_ATTEMPTS - 1 &&
+            currentGuess.length >= NUM_ATTEMPTS - 1)
         ) {
           setIsGameOver(true);
         }
 
         setCurrentGuessIndex((index) => {
-          return index < 5 ? index + 1 : index;
+          return index < NUM_ATTEMPTS - 1 ? index + 1 : index;
         });
       }
 
       if (e.key === 'Backspace') {
         setCurrentGuess((guess) => guess.slice(0, -1));
       } else {
+        if (e.key.length === 1) {
+          usedLettersSet.add(e.key.toUpperCase());
+        }
         setCurrentGuess((guess) => {
           if (e.key === 'Enter') return guess;
           return guess + e.key.toUpperCase();
@@ -124,7 +112,7 @@ function App() {
         {alphabet.map((l) => (
           <Letter
             key={l}
-            matching='none'
+            matching={usedLetters.includes(l) ? 'close' : 'none'}
             letter={l}
             isActive={false}
             isFinal={true}
