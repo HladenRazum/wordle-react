@@ -85,9 +85,9 @@ function App() {
   }, [currentGuess, currentGuessIndex, guesses, isGameOver]);
 
   return (
-    <main className='Wordle'>
-      <h1 className='title'>Wordle App</h1>
-      <p className='subtitle'>Try to guess the word</p>
+    <main className="Wordle">
+      <h1 className="title">Wordle</h1>
+      <p className="subtitle">Try to guess the word</p>
       <div>
         {guesses.map((guess, i) => {
           const isCurrentGuess = i === currentGuessIndex;
@@ -104,11 +104,11 @@ function App() {
       </div>
       {isGameOver && (
         <p>
-          The word was: <span className='solution'>{solution}</span>
+          The word was: <span className="solution">{solution}</span>
         </p>
       )}
-      <p className='used-letters_title'>Used letters </p>
-      <ul className='info'>
+      <p className="used-letters_title">Used letters </p>
+      <ul className="info">
         {alphabet.map((l) => (
           <Letter
             key={l}
@@ -116,7 +116,7 @@ function App() {
             letter={l}
             isActive={false}
             isFinal={true}
-            size='xs'
+            size="xs"
           />
         ))}
       </ul>
