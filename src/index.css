@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
 .word {
   display: flex;
   gap: 5px;
@@ -12,7 +20,7 @@
   align-items: center;
   width: 50px;
   height: 50px;
-  background-color: rgb(187, 184, 184);
+  background-color: rgb(229, 227, 227);
 }
 
 .success {
@@ -23,9 +31,23 @@
   background-color: rgb(215, 215, 14);
 }
 
+.active {
+  border: 1px solid rgb(14, 13, 13);
+}
+
+.solution {
+  font-weight: bold;
+}
+
 .Wordle {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.info {
+  position: absolute;
+  top: 20%;
+  left: 10%;
 }
