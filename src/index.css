@@ -1,0 +1,24 @@
+.word {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 2px;
+  border: 1px solid brown;
+  width: max-content;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: grey;
+}
+
+.success {
+  background-color: green;
+}
+
+.alert {
+  background-color: yellow;
+}
