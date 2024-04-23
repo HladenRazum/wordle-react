@@ -3,7 +3,18 @@
 }
 
 body {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.title {
+  font-size: 42px;
+  line-height: 22px;
+  color: #ff8707;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  margin-bottom: 2em;
 }
 
 .word {
@@ -14,12 +25,12 @@ body {
 }
 
 .letter {
-  font-size: 24px;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background-color: rgb(229, 227, 227);
 }
 
@@ -28,7 +39,7 @@ body {
 }
 
 .alert {
-  background-color: rgb(215, 215, 14);
+  background-color: #f2f26d;
 }
 
 .active {
@@ -40,6 +51,7 @@ body {
 }
 
 .Wordle {
+  margin-top: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +59,22 @@ body {
 }
 
 .info {
-  position: absolute;
-  top: 20%;
-  left: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  max-width: 390px;
+}
+
+.used-letters_title {
+  text-decoration: underline;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.letter.xs {
+  width: 30px;
+  font-size: 16px;
+  height: 30px;
+  text-transform: uppercase;
 }

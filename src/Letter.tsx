@@ -2,7 +2,8 @@ type LetterType = {
   letter: string;
   isFinal: boolean;
   isActive: boolean;
-  matching: "none" | "position" | "close";
+  matching: 'none' | 'position' | 'close';
+  size?: 'xs' | 'normal';
 };
 
 export default function Letter({
@@ -10,20 +11,25 @@ export default function Letter({
   isFinal,
   isActive,
   matching,
+  size = 'normal',
 }: LetterType) {
-  let className = "letter";
+  let className = 'letter';
+
+  if (size === 'xs') {
+    className += ' xs';
+  }
 
   if (isActive) {
-    className += " active";
+    className += ' active';
   }
 
   if (isFinal) {
     switch (matching) {
-      case "position":
-        className += " success";
+      case 'position':
+        className += ' success';
         break;
-      case "close":
-        className += " alert";
+      case 'close':
+        className += ' alert';
         break;
       default:
         break;
