@@ -1,20 +1,23 @@
 type LetterType = {
   letter: string;
-  matching: "none" | "position" | "close";
+  matching: 'none' | 'position' | 'close';
+  isFinal: boolean;
 };
 
-export default function Letter({ letter, matching }: LetterType) {
-  let className = "letter";
+export default function Letter({ letter, matching, isFinal }: LetterType) {
+  let className = 'letter';
 
-  switch (matching) {
-    case "position":
-      className += " success";
-      break;
-    case "close":
-      className += " alert";
-      break;
-    default:
-      break;
+  if (isFinal) {
+    switch (matching) {
+      case 'position':
+        className += ' success';
+        break;
+      case 'close':
+        className += ' alert';
+        break;
+      default:
+        break;
+    }
   }
 
   return <span className={className}>{letter}</span>;
